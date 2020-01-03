@@ -4,7 +4,7 @@
 import DeviceKit
 import UIKit
 
-let device = Device()
+let device = Device.current
 
 print(device)     // prints, for example, "iPhone 6 Plus"
 
@@ -52,19 +52,19 @@ if device.isOneOf(groupOfAllowedDevices) {
 }
 
 /// Get the Current Battery State
-if device.batteryState == .full || device.batteryState >= .charging(75) {
+if let state = device.batteryState, state == .full || state >= .charging(75) {
     print("Your battery is happy! 😊")
 }
 
 /// Get the Current Battery Level
-if device.batteryLevel >= 50 {
+if let level = device.batteryLevel, level >= 50 {
     // install_iOS()
 } else {
     // showError()
 }
 
 /// Get Low Power mode status
-if device.batteryState.lowPowerMode {
+if let state = device.batteryState, state.lowPowerMode {
     print("Low Power mode is enabled! 🔋")
 } else {
     print("Low Power mode is disabled! 😊")
